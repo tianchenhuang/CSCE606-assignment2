@@ -2,6 +2,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
   }
   
   th, td {
@@ -12,9 +13,22 @@ table {
   
   th {
     background-color: #f2f2f2;
+    cursor: pointer;
   }
   
-  .sorted {
-    background-color: #eef;
+  th:hover {
+    background-color: #e1e1e1;
+  }
+  
+  .sorted-asc::after {
+    content: " \2191"; /* arrow up */
+  }
+  
+  .sorted-desc::after {
+    content: " \2193"; /* arrow down */
+  }
+  
+  th.sorted-asc, th.sorted-desc {
+    background-color: #d1d1f1;
   }
   

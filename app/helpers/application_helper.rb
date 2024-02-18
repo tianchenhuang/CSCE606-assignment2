@@ -1,2 +1,7 @@
+# app/helpers/application_helper.rb
 module ApplicationHelper
-end
+    def flip_direction(column)
+      column == session[:sort] && session[:dir] == 'asc' ? 'desc' : 'asc'
+    end
+  end
+  

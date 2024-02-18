@@ -1,10 +1,21 @@
 <!-- app/views/movies/index.html.erb -->
+<h1>Movies List</h1>
+
 <table>
   <thead>
     <tr>
-      <th><%= link_to 'Title', movies_path(sort: 'title') %></th>
-      <th><%= link_to 'Rating', movies_path(sort: 'rating') %></th>
-      <th><%= link_to 'Release Date', movies_path(sort: 'release_date') %></th>
+      <th class="<%= 'sorted-asc' if session[:sort] == 'title' && session[:dir] == 'asc' %>
+                  <%= 'sorted-desc' if session[:sort] == 'title' && session[:dir] == 'desc' %>">
+        <%= link_to 'Title', movies_path(sort: 'title', dir: flip_direction('title')), id: "title_header" %>
+      </th>
+      <th class="<%= 'sorted-asc' if session[:sort] == 'rating' && session[:dir] == 'asc' %>
+                  <%= 'sorted-desc' if session[:sort] == 'rating' && session[:dir] == 'desc' %>">
+        <%= link_to 'Rating', movies_path(sort: 'rating', dir: flip_direction('rating')), id: "rating_header" %>
+      </th>
+      <th class="<%= 'sorted-asc' if session[:sort] == 'release_date' && session[:dir] == 'asc' %>
+                  <%= 'sorted-desc' if session[:sort] == 'release_date' && session[:dir] == 'desc' %>">
+        <%= link_to 'Release Date', movies_path(sort: 'release_date', dir: flip_direction('release_date')), id: "release_date_header" %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -12,7 +23,7 @@
       <tr>
         <td><%= movie.title %></td>
         <td><%= movie.rating %></td>
-        <td><%= movie.release_date %></td>
+        <td><%= movie.release_date.strftime("%b %d, %Y") %></td>
       </tr>
     <% end %>
   </tbody>
