@@ -68,3 +68,10 @@ class MoviesController < ApplicationController
       params.require(:movie).permit(:title, :rating, :description, :release_date)
     end
 end
+
+
+# app/controllers/movies_controller.rb
+def index
+  sort_by = params[:sort] || 'title'
+  @movies = Movie.order(sort_by)
+end
