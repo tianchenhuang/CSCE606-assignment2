@@ -1,10 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<!-- app/views/movies/show.html.erb -->
+<p id="notice"><%= notice %></p>
 
-<%= render @movie %>
+<h2><%= @movie.title %></h2>
+<p>
+  <strong>Rating:</strong>
+  <%= @movie.rating %>
+</p>
+<p>
+  <strong>Release Date:</strong>
+  <%= @movie.release_date.strftime("%B %d, %Y") %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @movie.description %>
+</p>
 
-<div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
-  <%= link_to "Back to movies", movies_path %>
-
-  <%= button_to "Destroy this movie", @movie, method: :delete %>
-</div>
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back to Movies', movies_path %> |
+<%= button_to 'Destroy', @movie, method: :delete, data: { confirm: 'Are you sure?' } %>

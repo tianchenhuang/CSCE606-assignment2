@@ -1,30 +1,39 @@
 <!-- app/views/movies/index.html.erb -->
 <h1>Movies List</h1>
 
+<!--
+<%= link_to 'Add New Movie', new_movie_path, class: "btn btn-primary" %>
+-->
+
 <table>
   <thead>
     <tr>
-      <th class="<%= 'sorted-asc' if session[:sort] == 'title' && session[:dir] == 'asc' %>
-                  <%= 'sorted-desc' if session[:sort] == 'title' && session[:dir] == 'desc' %>">
+      <th class="<%= 'sorted-asc' if session[:sort] == 'title' && session[:dir] == 'asc' %> <%= 'sorted-desc' if session[:sort] == 'title' && session[:dir] == 'desc' %>">
         <%= link_to 'Title', movies_path(sort: 'title', dir: flip_direction('title')), id: "title_header" %>
       </th>
-      <th class="<%= 'sorted-asc' if session[:sort] == 'rating' && session[:dir] == 'asc' %>
-                  <%= 'sorted-desc' if session[:sort] == 'rating' && session[:dir] == 'desc' %>">
+      <th class="<%= 'sorted-asc' if session[:sort] == 'rating' && session[:dir] == 'asc' %> <%= 'sorted-desc' if session[:sort] == 'rating' && session[:dir] == 'desc' %>">
         <%= link_to 'Rating', movies_path(sort: 'rating', dir: flip_direction('rating')), id: "rating_header" %>
       </th>
-      <th class="<%= 'sorted-asc' if session[:sort] == 'release_date' && session[:dir] == 'asc' %>
-                  <%= 'sorted-desc' if session[:sort] == 'release_date' && session[:dir] == 'desc' %>">
+      <th class="<%= 'sorted-asc' if session[:sort] == 'release_date' && session[:dir] == 'asc' %> <%= 'sorted-desc' if session[:sort] == 'release_date' && session[:dir] == 'desc' %>">
         <%= link_to 'Release Date', movies_path(sort: 'release_date', dir: flip_direction('release_date')), id: "release_date_header" %>
       </th>
+      <th> Actions </th>
     </tr>
   </thead>
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.title %></td>
+        <td><%= link_to movie.title, movie %></td>
         <td><%= movie.rating %></td>
         <td><%= movie.release_date.strftime("%b %d, %Y") %></td>
+        <td>
+          <%= link_to 'Show', movie_path(movie), class: "btn btn-info" %> |
+          <%= link_to 'Edit', edit_movie_path(movie), class: "btn btn-warning" %> |
+          <%= link_to 'Destroy', movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to 'Add New Movie', new_movie_path, class: "btn btn-primary" %>
